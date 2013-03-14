@@ -86,4 +86,13 @@ Tablets
 
 In Android or Objective C
 
+Goal
+====
 
+The goal of this application
+
+- do low level networking (udp)
+- learn how to create a windows application
+- learn how to create a osx application
+- work with the Pi
+- DIY wood + electronics + lights

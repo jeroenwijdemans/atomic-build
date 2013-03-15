@@ -103,7 +103,11 @@ Approach
 ========
 
 1. Write UDP server
+------------------
 1a. Write cmd line plugin
+
+Do not use any dependencies. Try to get the code (in Java as lean and readable as possible)
+
 2. Write Java client
 3. Write Windows Native client
 4. Write Mac client

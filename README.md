@@ -96,3 +96,19 @@ The goal of this application
 - learn how to create a osx application
 - work with the Pi
 - DIY wood + electronics + lights
+- have fun!
+
+
+Approach
+========
+
+1. Write UDP server
+1a. Write cmd line plugin
+2. Write Java client
+3. Write Windows Native client
+4. Write Mac client
+5. Write Hudson plugin
+6. Wire hardware
+6a. Write JNA USB plugin
+
+10. Install @ work :-)

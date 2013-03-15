@@ -1,15 +1,20 @@
 package atomic.server;
 
+import atomic.server.domain.AlarmPhase;
 import atomic.server.plugins.LogPlugin;
 import atomic.server.plugins.Plugin;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class Server {
 
+    private static final Logger LOGGER = Logger.getLogger(Server.class.getName());
+
     private final List<Plugin> plugins;
+    private AlarmPhase alarmPhase = new AlarmPhase();
 
     public Server() {
         List<Plugin> startPlugins = new ArrayList<Plugin>();
@@ -32,8 +37,14 @@ public class Server {
 
     public void run() {
         for (Plugin plugin : plugins) {
-
+            plugin.prepareActionOn();
+        }
+        for (Plugin plugin : plugins) {
+            plugin.takeActionOn(alarmPhase);
         }
     }
 
+    public void initialise() {
+        LOGGER.info("Initialising server ...");
+    }
 }

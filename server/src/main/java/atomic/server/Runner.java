@@ -37,6 +37,7 @@ public class Runner implements Runnable {
 
     @Override
     public void run() {
+        server.initialise();
         while (isRunning()) {
             server.run();
             try {

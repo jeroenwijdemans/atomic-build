@@ -25,11 +25,11 @@ public class ServerTest {
     public void canAddPluginToServer() {
         assertThat(server.getPlugins().size(), is(equalTo(0)));
 
-        Plugin sendUtpMessagePlugin = new LogPlugin();
-        server.addPlugin(sendUtpMessagePlugin);
+        Plugin logPlugin = new LogPlugin();
+        server.addPlugin(logPlugin);
 
         assertThat(server.getPlugins().size(), is(equalTo(1)));
-        assertThat(server.getPlugins().get(0), is(sameInstance((Plugin)sendUtpMessagePlugin)));
+        assertThat(server.getPlugins().get(0), is(sameInstance((Plugin)logPlugin)));
     }
 
 }

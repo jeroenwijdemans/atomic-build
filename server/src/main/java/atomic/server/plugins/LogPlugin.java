@@ -23,6 +23,5 @@ public class LogPlugin implements Plugin {
 
             LOGGER.info(String.format("Current phase is %s", alarmPhase.getPhase()));
         }
-
     }
 }

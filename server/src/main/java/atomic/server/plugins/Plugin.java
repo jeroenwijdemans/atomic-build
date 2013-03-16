@@ -20,4 +20,9 @@ public interface Plugin {
      */
     void takeActionOn(final AlarmPhase alarmPhase);
 
+    /**
+     * Called by the application to notify the plugin that it is going to shutdown.
+     */
+    void shutdown();
+
 }

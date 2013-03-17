@@ -11,11 +11,11 @@ public class SocketPlugin implements Plugin {
 
     private static final Logger LOGGER = Logger.getLogger(SocketPlugin.class.getName());
 
-    private SocketServer socketServer;
+    private SocketCommandServer socketServer;
 
     public SocketPlugin() {
         try {
-            socketServer = new SocketServer();
+            socketServer = new SocketCommandServer();
             Executors.newFixedThreadPool(1).execute(socketServer);
         } catch (IOException e) {
             e.printStackTrace();
@@ -28,7 +28,6 @@ public class SocketPlugin implements Plugin {
         if (socketServer.getLastMessage() != null) {
             LOGGER.info("Going to: " + socketServer.getLastMessage());
         }
-
     }
 
     @Override

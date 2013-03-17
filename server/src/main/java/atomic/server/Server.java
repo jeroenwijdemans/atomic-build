@@ -3,7 +3,7 @@ package atomic.server;
 import atomic.server.domain.AlarmPhase;
 import atomic.server.plugins.LogPlugin;
 import atomic.server.plugins.Plugin;
-import atomic.server.plugins.SocketPlugin;
+import atomic.server.plugins.socketclient.SocketPlugin;
 
 import java.util.ArrayList;
 import java.util.Collections;

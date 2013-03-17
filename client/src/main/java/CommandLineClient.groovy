@@ -1,3 +1,21 @@
+#!/usr/bin/env groovy
+def cli = new CliBuilder(usage: 'CommandLineClient.groovy -s <server> -p <port>')
+cli.with {
+    h longOpt: 'help',   'Show usage information'
+    s longOpt: 'server', args: 1, 'The server where to connect. Defaults to localhost'
+    p longOpt: 'port',   args: 1, 'The port on which to connect to the server. Defaults to 4444'
+}
+def options = cli.parse(args)
+if (!options || options.h) {
+    cli.usage()
+    System.exit(0)
+}
+
+port = options.p ?: 4444
+server = options.s ?: "localhost"
+
+println "Using server ${server}:${port}"
+
 def running = true
 
 def reader = System.in.newReader()
@@ -39,8 +57,6 @@ void send(def userInput) {
 }
 
 def openSocket() {
-    def port = 4444
-    def server = "localhost"
     try {
         s = new Socket(server, port);
     }

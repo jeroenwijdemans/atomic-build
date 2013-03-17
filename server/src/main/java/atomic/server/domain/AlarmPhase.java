@@ -13,11 +13,18 @@ public class AlarmPhase {
             phase = Phase.YELLOW;
         }
         else if (phase == Phase.YELLOW) {
+            phase = Phase.ORANGE;
+        }
+        else if (phase == Phase.ORANGE) {
             phase = Phase.RED;
         }
     }
 
     public void standDown() {
         phase = Phase.GREEN;
+    }
+
+    public void escalate() {
+        phase = Phase.RED;
     }
 }

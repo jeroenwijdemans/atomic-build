@@ -53,10 +53,7 @@ public class SocketPlugin implements Plugin {
                 alarmPhase.increase();
                 break;
             case ESCALATE:
-                alarmPhase.increase();
-                alarmPhase.increase();
-                alarmPhase.increase();
-                alarmPhase.increase();
+                alarmPhase.escalate();
                 break;
             case STAND_DOWN:
                 alarmPhase.standDown();

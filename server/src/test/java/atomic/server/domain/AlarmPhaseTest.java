@@ -1,11 +1,13 @@
 package atomic.server.domain;
 
+import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
+import static org.testng.Assert.fail;
 
 public class AlarmPhaseTest {
 
@@ -29,7 +31,7 @@ public class AlarmPhaseTest {
     }
 
     @Test
-    public void shouldBeGreenAfterStanddown() {
+    public void shouldBeGreenAfterStandDown() {
         alarmPhase.increase();
         assertThat(alarmPhase.getPhase(), is(equalTo(Phase.YELLOW)));
         alarmPhase.standDown();
@@ -37,13 +39,21 @@ public class AlarmPhaseTest {
     }
 
     @Test
-    public void shouldBeRedAfterTwoInitialIncreases() {
+    public void shouldBeOrangeAfterTwoInitialIncreases() {
         alarmPhase.increase();
         alarmPhase.increase();
+        assertThat(alarmPhase.getPhase(), is(equalTo(Phase.ORANGE)));
+    }
+
+    @Test
+    public void shouldBeRedAfterEscalation() {
+        assertThat(alarmPhase.getPhase(), is(equalTo(Phase.GREEN)));
+        alarmPhase.escalate();
         assertThat(alarmPhase.getPhase(), is(equalTo(Phase.RED)));
     }
-    @Test
-    public void shouldSendNotificationWhenPhaseIsChanged() {
 
+    @Test(enabled = false)
+    public void shouldSendNotificationWhenPhaseIsChanged() {
+        fail("Need to implement");
     }
 }

@@ -1,6 +1,5 @@
 package atomic.server.domain;
 
-import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -19,7 +18,7 @@ public class AlarmPhaseTest {
     }
 
     @Test
-    public void shouldBeGreenOnInitialisation() {
+         public void shouldBeGreenOnInitialisation() {
         assertThat(alarmPhase.getPhase(), is(equalTo(Phase.GREEN)));
     }
 
@@ -50,6 +49,38 @@ public class AlarmPhaseTest {
         assertThat(alarmPhase.getPhase(), is(equalTo(Phase.GREEN)));
         alarmPhase.escalate();
         assertThat(alarmPhase.getPhase(), is(equalTo(Phase.RED)));
+    }
+
+    @Test
+    public void shouldRemainAfterDecrease() {
+        alarmPhase = AlarmPhaseObjectMother.ALARM_PHASE_GREEN();
+        assertThat(alarmPhase.getPhase(), is(equalTo(Phase.GREEN)));
+        alarmPhase.decrease();
+        assertThat(alarmPhase.getPhase(), is(equalTo(Phase.GREEN)));
+    }
+
+    @Test
+    public void shouldBeGreenAfterDecreaseOnYellow() {
+        alarmPhase = AlarmPhaseObjectMother.ALARM_PHASE_YELLOW();
+        assertThat(alarmPhase.getPhase(), is(equalTo(Phase.YELLOW)));
+        alarmPhase.decrease();
+        assertThat(alarmPhase.getPhase(), is(equalTo(Phase.GREEN)));
+    }
+
+    @Test
+    public void shouldBeYellowAfterDecreaseOnOrange() {
+        alarmPhase = AlarmPhaseObjectMother.ALARM_PHASE_ORANGE();
+        assertThat(alarmPhase.getPhase(), is(equalTo(Phase.ORANGE)));
+        alarmPhase.decrease();
+        assertThat(alarmPhase.getPhase(), is(equalTo(Phase.YELLOW)));
+    }
+
+    @Test
+    public void shouldBeOrangeAfterDecreaseOnRed() {
+        alarmPhase = AlarmPhaseObjectMother.ALARM_PHASE_RED();
+        assertThat(alarmPhase.getPhase(), is(equalTo(Phase.RED)));
+        alarmPhase.decrease();
+        assertThat(alarmPhase.getPhase(), is(equalTo(Phase.ORANGE)));
     }
 
     @Test(enabled = false)

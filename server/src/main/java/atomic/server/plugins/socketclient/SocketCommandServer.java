@@ -19,12 +19,18 @@ public class SocketCommandServer implements Runnable {
     private volatile SocketMessage lastMessage = null;
     private volatile boolean running = true;
 
-    public SocketCommandServer() throws IOException {
-        serverSocket = new ServerSocket(4444);
+    public SocketCommandServer() {
+        try {
+            serverSocket = new ServerSocket(4444);
+        } catch (IOException e) {
+            LOGGER.severe("Failed to start SocketPlugin");
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void run() {
+        LOGGER.info("Start accepting incoming calls...");
         while (running) {
             acceptIncomingCalls();
         }
@@ -35,6 +41,7 @@ public class SocketCommandServer implements Runnable {
                 e.printStackTrace();
             }
         }
+        LOGGER.info("Stopping Socket Plugin ");
     }
 
     private void acceptIncomingCalls() {
@@ -72,13 +79,12 @@ public class SocketCommandServer implements Runnable {
         }
     }
 
-
     public void stopRunning() {
         running = false;
     }
 
     public SocketMessage takeMessage() {
-        SocketMessage tmpSocketMessage  = this.lastMessage;
+        SocketMessage tmpSocketMessage = this.lastMessage;
         this.lastMessage = null;
         return tmpSocketMessage;
     }

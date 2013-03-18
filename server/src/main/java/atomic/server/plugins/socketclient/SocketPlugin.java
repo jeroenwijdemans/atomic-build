@@ -1,9 +1,10 @@
 package atomic.server.plugins.socketclient;
 
+import atomic.server.CustomerThreadFactory;
 import atomic.server.domain.AlarmPhase;
 import atomic.server.plugins.Plugin;
 
-import java.io.IOException;
+import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 
@@ -12,15 +13,11 @@ public class SocketPlugin implements Plugin {
     private static final Logger LOGGER = Logger.getLogger(SocketPlugin.class.getName());
 
     private SocketCommandServer socketServer;
+    private Executor executor = Executors.newFixedThreadPool(1, new CustomerThreadFactory("sock-plugin"));
 
-    public SocketPlugin() {
-        try {
-            socketServer = new SocketCommandServer();
-            Executors.newFixedThreadPool(1).execute(socketServer);
-        } catch (IOException e) {
-            e.printStackTrace();
-            LOGGER.severe("Failed to start SocketPlugin");
-        }
+    public SocketPlugin(SocketCommandServer socketServer) {
+        this.socketServer = socketServer;
+        executor.execute(socketServer);
     }
 
     @Override
@@ -55,7 +52,7 @@ public class SocketPlugin implements Plugin {
     @Override
     public void shutdown() {
         socketServer.stopRunning();
-    }
 
+    }
 
 }

@@ -3,6 +3,7 @@ package atomic.server;
 import atomic.server.domain.AlarmPhase;
 import atomic.server.plugins.LogPlugin;
 import atomic.server.plugins.Plugin;
+import atomic.server.plugins.socketclient.SocketCommandServer;
 import atomic.server.plugins.socketclient.SocketPlugin;
 
 import java.util.ArrayList;
@@ -20,7 +21,7 @@ public class Server {
     public Server() {
         List<Plugin> startPlugins = new ArrayList<Plugin>();
         startPlugins.add(new LogPlugin());
-        startPlugins.add(new SocketPlugin());
+        startPlugins.add(new SocketPlugin(new SocketCommandServer()));
 
         plugins = startPlugins;
     }
@@ -44,6 +45,13 @@ public class Server {
         for (Plugin plugin : plugins) {
             plugin.takeActionOn(alarmPhase);
         }
+    }
+
+    public void shutdown() {
+        for (Plugin plugin : plugins) {
+            plugin.shutdown();
+        }
+
     }
 
     public void initialise() {

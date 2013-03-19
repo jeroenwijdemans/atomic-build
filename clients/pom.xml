@@ -9,9 +9,14 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>client</artifactId>
-    <packaging>jar</packaging>
-    <name>Server</name>
+    <artifactId>clients-root</artifactId>
+    <packaging>pom</packaging>
+    <name>Clients - Root POM</name>
+
+    <modules>
+        <module>cmd-client</module>
+        <module>javafx-client</module>
+    </modules>
 
 
 </project>

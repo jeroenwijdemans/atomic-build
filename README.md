@@ -104,7 +104,6 @@ Approach
 
 1. Write UDP server
 ------------------
-1a. Write cmd line plugin
 
 Do not use any dependencies. Try to get the code (in Java as lean and readable as possible)
 
@@ -112,13 +111,27 @@ Running the server:
 - add bin folder to the PATH
 - call atomic-run.sh
 
+1a. Write cmd line plugin
+./CommandLineClient.groovy
+or
+goorvy CommandLineClient.groovy
+
+1b. Write web plugin
+
+Using Rails
+
 
 2. Write Java client
+
+Using JavaFx
+
 3. Write Windows Native client
 4. Write Mac client
 5. Write Hudson plugin
 6. Wire hardware
 6a. Write JNA USB plugin
+
+
 
 10. Install @ work :-)
 

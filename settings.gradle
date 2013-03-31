@@ -1,0 +1,4 @@
+include 'clients'
+include 'clients:cmd-client'
+include 'clients:javafx-client'
+include 'server'

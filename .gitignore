@@ -1,2 +1,7 @@
 target/
+build/
+out/
 *.iml
+*.ipr
+.idea
+.gradle

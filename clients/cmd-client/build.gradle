@@ -1,0 +1,20 @@
+apply plugin: 'groovy'
+apply plugin: 'application'
+apply plugin: 'executable-jar'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'net.nisgits.gradle:gradle-executable-jar-plugin:master-REL-6'
+    }
+}
+
+dependencies {
+    groovy group: 'org.codehaus.groovy', name: 'groovy', version: '2.1.0'
+    compile group: 'commons-cli', name: 'commons-cli', version: '1.2'
+}
+
+mainClassName = 'CommandLineClient'
+project.ext.mainClass = 'CommandLineClient'

@@ -1,0 +1,9 @@
+// https://bitbucket.org/shemnon/javafx-gradle/
+// http://jaxenter.com/tutorial-a-guide-to-the-gradle-javafx-plugin-46270.html
+apply from: 'http://dl.bintray.com/content/shemnon/javafx-gradle/0.2.0/javafx.plugin'
+
+javafx {
+    appID 'SampleApp'
+    appName 'Sample Application'
+    mainClass 'Main'
+}

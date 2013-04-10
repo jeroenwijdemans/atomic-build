@@ -82,7 +82,7 @@ public class SocketPluginTest {
         AlarmPhase alarmPhase = AlarmPhaseObjectMother.ALARM_PHASE_ORANGE();
         assertThat(alarmPhase.getPhase(), is(equalTo(Phase.ORANGE)));
 
-        when(socketCommandServerMock.takeMessage()).thenReturn(null);
+        when(socketCommandServerMock.takeMessage()).thenReturn(SocketMessage.UNKNOWN);
 
         socketPlugin.takeActionOn(alarmPhase);
 

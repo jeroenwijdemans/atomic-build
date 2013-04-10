@@ -13,9 +13,9 @@ public class MessageParserTest {
 
     @Test
     public void shouldReturnEmptyMessageWhenMessageCannotBeParsed() {
-        assertThat(messageParser.parseMessageLine(null), is(nullValue()));
-        assertThat(messageParser.parseMessageLine(""), is(nullValue()));
-        assertThat(messageParser.parseMessageLine("aapnootmies"), is(nullValue()));
+        assertThat(messageParser.parseMessageLine(null), is(is(equalTo(SocketMessage.UNKNOWN))));
+        assertThat(messageParser.parseMessageLine(""), is(is(equalTo(SocketMessage.UNKNOWN))));
+        assertThat(messageParser.parseMessageLine("aapnootmies"), is(equalTo(SocketMessage.UNKNOWN)));
     }
 
     @Test

@@ -17,8 +17,8 @@ public class MessageParser {
 
     public SocketMessage parseMessageLine(String line) {
         if (line == null) {
-            LOGGER.info("Empty or multi line message not supported");
-            return null;
+            LOGGER.info("Empty or multi-line message not supported");
+            return SocketMessage.UNKNOWN;
         }
 
         line = line.toUpperCase();
@@ -31,7 +31,7 @@ public class MessageParser {
         } else {
             LOGGER.warning("Ignoring unknown message arrived : " + line);
         }
-        return null;
+        return SocketMessage.UNKNOWN;
     }
 
 }

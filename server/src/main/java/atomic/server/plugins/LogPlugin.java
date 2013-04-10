@@ -17,7 +17,7 @@ public class LogPlugin implements Plugin {
     @Override
     public void takeActionOn(AlarmPhase alarmPhase) {
 
-        if (counter++ % 250 == 0) {
+        if (counter++ % 450 == 0) {
             counter = 1;
 
             LOGGER.info(String.format("Current phase is %s", alarmPhase.getPhase()));

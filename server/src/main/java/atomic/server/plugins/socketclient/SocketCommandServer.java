@@ -1,5 +1,7 @@
 package atomic.server.plugins.socketclient;
 
+import atomic.server.Util;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -16,10 +18,11 @@ public class SocketCommandServer implements Runnable {
     private final MessageParser messageParser = MessageParser.getInstance();
 
     private Socket clientSocket = null;
-    private volatile SocketMessage lastMessage = null;
+    private volatile SocketMessage lastMessage = SocketMessage.NO_MESSAGE;
     private volatile boolean running = true;
 
     public SocketCommandServer() {
+        LOGGER.info("Creating SocketCommandServer");
         try {
             serverSocket = new ServerSocket(4444);
         } catch (IOException e) {
@@ -34,13 +37,7 @@ public class SocketCommandServer implements Runnable {
         while (running) {
             acceptIncomingCalls();
         }
-        if (clientSocket != null) {
-            try {
-                clientSocket.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+        Util.closeQuietly(clientSocket);
         LOGGER.info("Stopping Socket Plugin ");
     }
 
@@ -51,13 +48,15 @@ public class SocketCommandServer implements Runnable {
         try {
             // wait for client to tell something
             clientSocket = serverSocket.accept();
-            LOGGER.fine("Incoming message");
+            LOGGER.info("Incoming message");
 
             out = new PrintWriter(clientSocket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 //                String inputLine, outputLine;
 
             String line = in.readLine();
+
+            LOGGER.info("Taking message " + line);
 
             lastMessage = messageParser.parseMessageLine(line);
 
@@ -70,12 +69,8 @@ public class SocketCommandServer implements Runnable {
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            if (out != null) out.close();
-            if (in != null) try {
-                in.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            Util.closeQuietly(out);
+            Util.closeQuietly(in);
         }
     }
 
@@ -85,7 +80,7 @@ public class SocketCommandServer implements Runnable {
 
     public SocketMessage takeMessage() {
         SocketMessage tmpSocketMessage = this.lastMessage;
-        this.lastMessage = null;
+        this.lastMessage = SocketMessage.NO_MESSAGE;
         return tmpSocketMessage;
     }
 

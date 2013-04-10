@@ -44,4 +44,20 @@ public class AlarmPhase {
     public String toString() {
         return "AlarmPhase[" + phase + ']';
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof AlarmPhase)) {
+            return false;
+        }
+        AlarmPhase that = (AlarmPhase) o;
+        if (phase != that.phase)
+            return false;
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return phase != null ? phase.hashCode() : 0;
+    }
 }

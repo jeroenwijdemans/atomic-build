@@ -1,5 +1,6 @@
 package atomic.server;
 
+import java.util.concurrent.Executors;
 import java.util.logging.Logger;
 
 public class Runner implements Runnable {
@@ -20,6 +21,8 @@ public class Runner implements Runnable {
     public Runner(Server server) {
         this.server = server;
         LOGGER.info("Starting server...");
+        Executors.newFixedThreadPool(1)
+                .execute(this);
         LOGGER.info("Started server...");
     }
 

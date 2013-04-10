@@ -6,6 +6,7 @@ import org.testng.annotations.Test;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.not;
 import static org.testng.Assert.fail;
 
 public class AlarmPhaseTest {
@@ -82,6 +83,18 @@ public class AlarmPhaseTest {
         alarmPhase.decrease();
         assertThat(alarmPhase.getPhase(), is(equalTo(Phase.ORANGE)));
     }
+
+    @Test
+    public void shouldBeEqualAlarmPhaseWhenPhaseIsSame() {
+        AlarmPhase alarmPhaseGreen1 = new AlarmPhase();
+        AlarmPhase alarmPhaseGreen2 = new AlarmPhase();
+
+        assertThat(alarmPhaseGreen1, is(equalTo(alarmPhaseGreen2)));
+
+        alarmPhaseGreen2.increase();
+        assertThat(alarmPhaseGreen1, is(not(equalTo(alarmPhaseGreen2))));
+    }
+
 
     @Test(enabled = false)
     public void shouldSendNotificationWhenPhaseIsChanged() {

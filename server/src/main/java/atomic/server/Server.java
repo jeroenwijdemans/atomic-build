@@ -3,6 +3,8 @@ package atomic.server;
 import atomic.server.domain.AlarmPhase;
 import atomic.server.plugins.LogPlugin;
 import atomic.server.plugins.Plugin;
+import atomic.server.plugins.notifcationsocketserver.NotificationServer;
+import atomic.server.plugins.notifcationsocketserver.NotificationPlugin;
 import atomic.server.plugins.socketclient.SocketCommandServer;
 import atomic.server.plugins.socketclient.SocketPlugin;
 
@@ -22,6 +24,7 @@ public class Server {
         List<Plugin> startPlugins = new ArrayList<Plugin>();
         startPlugins.add(new LogPlugin());
         startPlugins.add(new SocketPlugin(new SocketCommandServer()));
+        startPlugins.add(new NotificationPlugin(new NotificationServer()));
 
         plugins = startPlugins;
     }

@@ -128,8 +128,16 @@ Using JavaFx
 3. Write Windows Native client
 4. Write Mac client
 5. Write Hudson plugin
+
 6. Wire hardware
-6a. Write JNA USB plugin
+----------------
+
+6a. Write USB Processing plugin
+Using Processing programming language we can talk to the Arduino:
+
+server <--> processing plugin <--> arduino
+
+
 
 
 

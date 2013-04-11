@@ -108,14 +108,16 @@ public class ClientListener implements Runnable {
             socket = new Socket(HOST, PORT);
             out = new PrintWriter(socket.getOutputStream(), true);
             out.write(request);
-            writeTextOnScreen(String.format("Send registration request"));
+            writeTextOnScreen("Done sending Send registration request");
         } catch (IOException e) {
-            e.printStackTrace();
+            writeTextOnScreen("Failed registering ...");
+            running = false;
+
         } finally {
             Util.closeQuietly(out);
             Util.closeQuietly(socket);
         }
-        writeTextOnScreen("Done sending Send registration request");
+
     }
 
     public void stop() {

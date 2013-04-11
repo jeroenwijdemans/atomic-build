@@ -1,4 +1,3 @@
-import atomic.server.plugins.socketclient.Destructible;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
@@ -12,6 +11,8 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.logging.Logger;
 
@@ -34,7 +35,13 @@ public class ThreadAgnosticJavaFxExplosionRunner implements Runnable {
     }
 
     private void prepareExplosion() {
-        File nuclearMovie = new File("/Users/jeroenwijdemans/werk/workspace/atomic-build/clients/javafx-client/src/main/resources/Nuclear_Explosion.mp4");
+        File nuclearMovie = null;
+        try {
+            URL url = this.getClass().getResource("Nuclear_Explosion.mp4");
+            nuclearMovie = new File(url.toURI());
+        } catch (URISyntaxException e) {
+            throw new RuntimeException("Cannot find: " + nuclearMovie.getAbsolutePath());
+        }
         if (!nuclearMovie.exists()) {
             throw new RuntimeException("Cannot find: " + nuclearMovie.getAbsolutePath());
         }

@@ -15,10 +15,8 @@
 
     <modules>
         <module>cmd-client</module>
-        <!--<module>arduino-processing-client</module>-->
-<!--
+        <module>arduino-processing-client</module>
         <module>javafx-client</module>
--->
     </modules>
 
 

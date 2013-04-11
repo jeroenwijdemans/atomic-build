@@ -102,7 +102,7 @@ The goal of this application
 Approach
 ========
 
-1. Write UDP server
+1. Write Socket server
 ------------------
 
 Do not use any dependencies. Try to get the code (in Java as lean and readable as possible)
@@ -119,14 +119,21 @@ goorvy CommandLineClient.groovy
 1b. Write web plugin
 
 Using Rails
+TO BE DONE
 
 
 2. Write Java client
 
-Using JavaFx
+Under ./clients/javafx-client
 
-3. Write Windows Native client
-4. Write Mac client
+Running this client:
+- copy JAVA_HOME/jre/lib/jfxrt.jar to JAVA_HOME/jre/lib/ext
+- use JAva 7 u11 or newer
+- add bin folder to the PATH
+- call client-run.sh
+
+3. Write native Windows client
+4. Write native Mac client
 5. Write Hudson plugin
 
 6. Wire hardware
@@ -136,8 +143,6 @@ Using JavaFx
 Using Processing programming language we can talk to the Arduino:
 
 server <--> processing plugin <--> arduino
-
-
 
 
 
